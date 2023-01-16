@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище OrderBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CustomerType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="PenId" Type="int" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
+        <EntityType Name="Pen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="PenTypeId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PenType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Customer_CustomerType">
+          <End Role="CustomerType" Type="Self.CustomerType" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Pen">
+          <End Role="Pen" Type="Self.Pen" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pen_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Pen" Type="Self.Pen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pen">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pen_PenType">
+          <End Role="PenType" Type="Self.PenType" Multiplicity="0..1" />
+          <End Role="Pen" Type="Self.Pen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PenType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pen">
+              <PropertyRef Name="PenTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище OrderBaseModelContainer">
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerType" EntityType="Self.CustomerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pen" EntityType="Self.Pen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PenType" EntityType="Self.PenType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Customer_CustomerType" Association="Self.FK_Customer_CustomerType">
+            <End Role="CustomerType" EntitySet="CustomerType" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Pen" Association="Self.FK_Order_Pen">
+            <End Role="Pen" EntitySet="Pen" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pen_Company" Association="Self.FK_Pen_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Pen" EntitySet="Pen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pen_PenType" Association="Self.FK_Pen_PenType">
+            <End Role="PenType" EntitySet="PenType" />
+            <End Role="Pen" EntitySet="Pen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Customer" Association="Self.FK_User_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OrderBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="OrderBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="OrderBaseModel.Company" />
+          <EntitySet Name="Customers" EntityType="OrderBaseModel.Customer" />
+          <EntitySet Name="CustomerTypes" EntityType="OrderBaseModel.CustomerType" />
+          <EntitySet Name="Orders" EntityType="OrderBaseModel.Order" />
+          <EntitySet Name="Pens" EntityType="OrderBaseModel.Pen" />
+          <EntitySet Name="PenTypes" EntityType="OrderBaseModel.PenType" />
+          <EntitySet Name="sysdiagrams" EntityType="OrderBaseModel.sysdiagram" />
+          <EntitySet Name="Users" EntityType="OrderBaseModel.User" />
+          <AssociationSet Name="FK_Pen_Company" Association="OrderBaseModel.FK_Pen_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Pen" EntitySet="Pens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_CustomerType" Association="OrderBaseModel.FK_Customer_CustomerType">
+            <End Role="CustomerType" EntitySet="CustomerTypes" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="OrderBaseModel.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Customer" Association="OrderBaseModel.FK_User_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Pen" Association="OrderBaseModel.FK_Order_Pen">
+            <End Role="Pen" EntitySet="Pens" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pen_PenType" Association="OrderBaseModel.FK_Pen_PenType">
+            <End Role="PenType" EntitySet="PenTypes" />
+            <End Role="Pen" EntitySet="Pens" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pens" Relationship="OrderBaseModel.FK_Pen_Company" FromRole="Company" ToRole="Pen" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CustomerType" Relationship="OrderBaseModel.FK_Customer_CustomerType" FromRole="Customer" ToRole="CustomerType" />
+          <NavigationProperty Name="Orders" Relationship="OrderBaseModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+          <NavigationProperty Name="Users" Relationship="OrderBaseModel.FK_User_Customer" FromRole="Customer" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CustomerType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="OrderBaseModel.FK_Customer_CustomerType" FromRole="CustomerType" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="PenId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="OrderBaseModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Pen" Relationship="OrderBaseModel.FK_Order_Pen" FromRole="Order" ToRole="Pen" />
+        </EntityType>
+        <EntityType Name="Pen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PenTypeId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="OrderBaseModel.FK_Pen_Company" FromRole="Pen" ToRole="Company" />
+          <NavigationProperty Name="Orders" Relationship="OrderBaseModel.FK_Order_Pen" FromRole="Pen" ToRole="Order" />
+          <NavigationProperty Name="PenType" Relationship="OrderBaseModel.FK_Pen_PenType" FromRole="Pen" ToRole="PenType" />
+        </EntityType>
+        <EntityType Name="PenType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pens" Relationship="OrderBaseModel.FK_Pen_PenType" FromRole="PenType" ToRole="Pen" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="OrderBaseModel.FK_User_Customer" FromRole="User" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_Pen_Company">
+          <End Type="OrderBaseModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.Pen" Role="Pen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pen">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_CustomerType">
+          <End Type="OrderBaseModel.CustomerType" Role="CustomerType" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Type="OrderBaseModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Customer">
+          <End Type="OrderBaseModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Pen">
+          <End Type="OrderBaseModel.Pen" Role="Pen" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pen_PenType">
+          <End Type="OrderBaseModel.PenType" Role="PenType" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.Pen" Role="Pen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PenType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pen">
+              <PropertyRef Name="PenTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище OrderBaseModelContainer" CdmEntityContainer="OrderBaseEntities">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="OrderBaseModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="OrderBaseModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerTypes">
+            <EntityTypeMapping TypeName="OrderBaseModel.CustomerType">
+              <MappingFragment StoreEntitySet="CustomerType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="OrderBaseModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="PenId" ColumnName="PenId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pens">
+            <EntityTypeMapping TypeName="OrderBaseModel.Pen">
+              <MappingFragment StoreEntitySet="Pen">
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="PenTypeId" ColumnName="PenTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PenTypes">
+            <EntityTypeMapping TypeName="OrderBaseModel.PenType">
+              <MappingFragment StoreEntitySet="PenType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="OrderBaseModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="OrderBaseModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
