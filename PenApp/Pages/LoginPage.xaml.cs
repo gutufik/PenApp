@@ -28,7 +28,12 @@ namespace PenApp.Pages
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (DataAccess.GetUser(tbLogin.Text, pbPassword.Password.ToString()) != null)
+            {
+                NavigationService.Navigate(new PenListPage());
+            }
+            else
+                MessageBox.Show("Неверный логин или пароль");
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)

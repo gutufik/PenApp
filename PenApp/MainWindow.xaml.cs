@@ -24,6 +24,24 @@ namespace PenApp
         {
             InitializeComponent();
             MainFrame.NavigationService.Navigate(new Pages.LoginPage());
+            MainFrame.Navigated += MainFrame_Navigated;
+        }
+
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            tbTitle.Text = (MainFrame.Content as Page).Title;
+        }
+
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame.CanGoBack)
+                MainFrame.NavigationService.GoBack();
+        }
+
+        private void btnGoForward_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame.CanGoForward)
+                MainFrame.NavigationService.GoForward();
         }
     }
 }

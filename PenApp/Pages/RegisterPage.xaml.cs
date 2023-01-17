@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PenApp.DataBase;
+
 
 namespace PenApp.Pages
 {
@@ -27,7 +29,23 @@ namespace PenApp.Pages
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+
+            var user = new User()
+            {
+                Login = tbLogin.Text,
+                Password = pbPassword.Password.ToString()
+            };
+                DataAccess.SaveUser(user);
+                NavigationService.Navigate(new PenListPage());
+            }
+            catch
+            {
+                MessageBox.Show("");
+            }
+
+
         }
 
         private void btnGoBack_Click(object sender, RoutedEventArgs e)

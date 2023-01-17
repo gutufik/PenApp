@@ -6,7 +6,7 @@
     <Application.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="10"/>
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Padding" Value="10 5"/>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="10"/>
