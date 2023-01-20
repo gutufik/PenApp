@@ -19,6 +19,15 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
+        <TextBox x:Name="tbSearch" TextChanged="tbSearch_TextChanged"/>
+
+        <ComboBox x:Name="cbType" Grid.Column="1"
+                  ItemsSource="{Binding PenTypes}"
+                  SelectionChanged="cbType_SelectionChanged"
+                  SelectedIndex="0"
+                  DisplayMemberPath="Name"/>
+
+
         <Button x:Name="btnAdd" Content="Add" 
                 Grid.Column="2"
                 Click="btnAdd_Click"/>

@@ -24,12 +24,18 @@ namespace PenApp.Pages
     public partial class PenListPage : Page
     {
         public List<DataBase.Pen> Pens { get; set; }
+        public List<DataBase.Pen> PensForFiltters { get; set; }
+
+        public List<PenType> PenTypes { get; set; }
 
         public PenListPage()
         {
             InitializeComponent();
 
             Pens = DataAccess.GetPens();
+            PenTypes = DataAccess.GetPenTypes();
+            PenTypes.Insert(0, new PenType { Name = "Все" });
+
             DataAccess.RefreshhList += DataAccess_RefreshhList;
             DataContext = this;
         }
@@ -51,6 +57,29 @@ namespace PenApp.Pages
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new PenPage(new DataBase.Pen()));
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void ApplyFilters()
+        {
+            var searchText = tbSearch.Text;
+            PensForFiltters = Pens.FindAll(x => x.Name.Contains(searchText));
+            var penType = cbType.SelectedItem as PenType;
+            if (penType.Name != "Все")
+            {
+                PensForFiltters = PensForFiltters.FindAll(x => x.PenType == penType);
+            }
+            lvPens.ItemsSource = PensForFiltters;
+            lvPens.Items.Refresh();
         }
     }
 }
