@@ -40,13 +40,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-        <Button x:Name="btnMenu" Content="Menu" Click="btnMenu_Click"/>
-
-        <Rectangle x:Name="myRect" Width="200" Fill="Red" 
-                   Grid.Row="1"
-                   HorizontalAlignment="Left"/>
-
-
     </Grid>
 </Page>

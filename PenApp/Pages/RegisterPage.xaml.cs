@@ -31,13 +31,13 @@ namespace PenApp.Pages
         {
             try
             {
-
-            var user = new User()
-            {
-                Login = tbLogin.Text,
-                Password = pbPassword.Password.ToString()
-            };
+                var user = new User()
+                {
+                    Login = tbLogin.Text,
+                    Password = pbPassword.Password.ToString()
+                };
                 DataAccess.SaveUser(user);
+                App.User = user;
                 NavigationService.Navigate(new PenListPage());
             }
             catch

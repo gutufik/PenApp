@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PenApp
 {
@@ -20,11 +21,39 @@ namespace PenApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        DispatcherTimer timer;
+        bool isHidden = true;
         public MainWindow()
         {
             InitializeComponent();
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            timer.Tick += Timer_Tick;
+
             MainFrame.NavigationService.Navigate(new Pages.LoginPage());
             MainFrame.Navigated += MainFrame_Navigated;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (isHidden)
+            {
+                menuGrid.Width += 2;
+                if (menuGrid.Width >= 100)
+                {
+                    timer.Stop();
+                    isHidden = false;
+                }
+            }
+            else
+            {
+                menuGrid.Width -= 2;
+                if (menuGrid.Width <= 0)
+                {
+                    timer.Stop();
+                    isHidden = true;
+                }
+            }
         }
 
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
@@ -42,6 +71,27 @@ namespace PenApp
         {
             if (MainFrame.CanGoForward)
                 MainFrame.NavigationService.GoForward();
+        }
+
+        private void btnMenu_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Start();
+        }
+
+        private void btnPens_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.User == null)
+                MessageBox.Show("You need to log in");
+            else
+                MainFrame.NavigationService.Navigate(new Pages.PenListPage());
+        }
+
+        private void btnOrders_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.User == null)
+                MessageBox.Show("You need to log in");
+            else
+                MainFrame.NavigationService.Navigate(new Pages.OrderListPage());
         }
     }
 }

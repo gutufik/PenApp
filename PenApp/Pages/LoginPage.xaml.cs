@@ -28,8 +28,10 @@ namespace PenApp.Pages
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (DataAccess.GetUser(tbLogin.Text, pbPassword.Password.ToString()) != null)
+            var user = DataAccess.GetUser(tbLogin.Text, pbPassword.Password.ToString());
+            if (user != null)
             {
+                App.User = user;
                 NavigationService.Navigate(new PenListPage());
             }
             else

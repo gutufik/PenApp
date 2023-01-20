@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PenApp.DataBase;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,6 @@ namespace PenApp
     /// </summary>
     public partial class App : Application
     {
+        public static User User { get; set; }
     }
 }

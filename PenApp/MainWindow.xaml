@@ -11,14 +11,35 @@
             <RowDefinition />
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
         <TextBlock x:Name="tbTitle" 
+                   Grid.ColumnSpan="2"
                    HorizontalAlignment="Center"/>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button x:Name="btnMenu" Width="40" Height="40" HorizontalAlignment="Left"
+                Grid.Column="1"
+            Click="btnMenu_Click"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
             <Button x:Name="btnGoBack" Content="Back" Click="btnGoBack_Click"/>
             <Button x:Name="btnGoForward" Content="Forward" Click="btnGoForward_Click"/>
         </StackPanel>
-        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+
+        
+
+        <Grid x:Name="menuGrid" Grid.RowSpan="2" Width="0" Background="AntiqueWhite" HorizontalAlignment="Left">
+            <StackPanel >
+                <Button x:Name="btnPens" Content="Pens" Click="btnPens_Click"/>
+                <Button x:Name="btnOrders" Content="Orders" Click="btnOrders_Click"/>
+            </StackPanel>
+        </Grid>
+        
+        <Frame x:Name="MainFrame" Grid.Row="1" 
+               Grid.Column="1"
+               NavigationUIVisibility="Hidden"/>
 
     </Grid>
 </Window>
