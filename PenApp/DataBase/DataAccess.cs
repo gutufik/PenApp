@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace PenApp.DataBase
 {
     public class DataAccess
     {
+        public delegate void RefreshhListDelegate();
+        public static event RefreshhListDelegate RefreshhList;
+
         public static List<User> GetUsers() => OrderBaseEntities.GetContext().Users.ToList();
 
         public static List<Order> GetOrders() => OrderBaseEntities.GetContext().Orders.ToList();
@@ -30,8 +34,39 @@ namespace PenApp.DataBase
                 OrderBaseEntities.GetContext().Users.Add(user);
 
             OrderBaseEntities.GetContext().SaveChanges();
+            RefreshhList?.Invoke();
         }
 
+        internal static void SaveOrder(Order order)
+        {
+            if (order.Id == 0)
+                OrderBaseEntities.GetContext().Orders.Add(order);
 
+            OrderBaseEntities.GetContext().SaveChanges();
+            RefreshhList?.Invoke();
+        }
+
+        internal static void DeleteOrder(Order order)
+        {
+            OrderBaseEntities.GetContext().Orders.Remove(order);
+            OrderBaseEntities.GetContext().SaveChanges();
+            RefreshhList?.Invoke();
+        }
+
+        internal static void SavePen(Pen pen)
+        {
+            if (pen.Id == 0)
+                OrderBaseEntities.GetContext().Pens.Add(pen);
+
+            OrderBaseEntities.GetContext().SaveChanges();
+            RefreshhList?.Invoke();
+        }
+
+        internal static void DeletePen(Pen pen)
+        {
+            OrderBaseEntities.GetContext().Pens.Remove(pen);
+            OrderBaseEntities.GetContext().SaveChanges();
+            RefreshhList?.Invoke();
+        }
     }
 }

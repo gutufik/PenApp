@@ -9,17 +9,44 @@
       Title="PenListPage">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnBurger" Content="=" Click="btnBurger_Click"/>
-        <ListView x:Name="LvPens"
+
+        <Button x:Name="btnAdd" Content="Add" 
+                Grid.Column="2"
+                Click="btnAdd_Click"/>
+
+        <ListView x:Name="lvPens"
+                  Grid.ColumnSpan="3"
                   Grid.Row="1"
-                  ItemsSource="{Binding Pens}"/>
-        <Rectangle x:Name="myRectange" Fill="Red" Panel.ZIndex="1" 
-                   Grid.Row="1" Width="200" HorizontalAlignment="Left"
-                   />
+                  ItemsSource="{Binding Pens}"
+                  SelectionChanged="lvPens_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock >
+                        <Run Text="{Binding Name}"/>
+                        <Run Text="{Binding PenType.Name}"/>
+                        <Run Text="{Binding Company.Name}"/>
+                        <Run Text="{Binding Color}"/>
+                        <Run Text="{Binding Price}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button x:Name="btnMenu" Content="Menu" Click="btnMenu_Click"/>
+
+        <Rectangle x:Name="myRect" Width="200" Fill="Red" 
+                   Grid.Row="1"
+                   HorizontalAlignment="Left"/>
+
 
     </Grid>
 </Page>
