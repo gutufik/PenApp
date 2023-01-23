@@ -37,6 +37,24 @@ namespace PenApp.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            var stringBuilder = new StringBuilder();
+            if (Pen.Name == null)
+                stringBuilder.AppendLine("Напишите название");
+            if (Pen.PenType == null)
+                stringBuilder.AppendLine("Виберите тип ручки");
+            if (Pen.Company == null)
+                stringBuilder.AppendLine("Виберите производителя");
+            if (Pen.Color == null)
+                stringBuilder.AppendLine("Напишите цвет");
+            if (Pen.Price <= 0)
+                stringBuilder.AppendLine("Цена должна быть больше 0");
+
+            if (stringBuilder.Length > 0)
+            {
+                MessageBox.Show(stringBuilder.ToString());
+                return;
+            }
+
             DataAccess.SavePen(Pen);
             NavigationService.GoBack();
         }

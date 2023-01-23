@@ -65,6 +65,7 @@ namespace PenApp
             {
                 btnGoBack.Visibility = Visibility.Collapsed;
                 btnGoForward.Visibility = Visibility.Collapsed;
+                App.User = null;
             }
             else
             {

@@ -22,9 +22,9 @@ namespace PenApp.DataBase
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> PenTypeId { get; set; }
-        public Nullable<int> CompanyId { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public int PenTypeId { get; set; }
+        public int CompanyId { get; set; }
+        public decimal Price { get; set; }
         public string Color { get; set; }
     
         public virtual Company Company { get; set; }

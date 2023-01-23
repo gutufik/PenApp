@@ -14,7 +14,7 @@
             <Setter Property="Margin" Value="10"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Padding" Value="3"/>
             <Setter Property="MaxWidth" Value="300"/>
             <Setter Property="MaxHeight" Value="50"/>
         </Style>
@@ -22,7 +22,7 @@
             <Setter Property="Margin" Value="10"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Padding" Value="3"/>
             <Setter Property="MaxWidth" Value="300"/>
             <Setter Property="MaxHeight" Value="50"/>
         </Style>
@@ -39,6 +39,7 @@
         <Style TargetType="DatePicker">
             <Setter Property="MaxWidth" Value="300"/>
             <Setter Property="MaxHeight" Value="50"/>
+            <Setter Property="FontSize" Value="20"/>
         </Style>
          
     </Application.Resources>

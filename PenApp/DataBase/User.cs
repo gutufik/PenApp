@@ -17,7 +17,7 @@ namespace PenApp.DataBase
         public int Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public Nullable<int> CustomerId { get; set; }
+        public int CustomerId { get; set; }
     
         public virtual Customer Customer { get; set; }
     }

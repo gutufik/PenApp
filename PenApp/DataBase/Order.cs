@@ -15,10 +15,10 @@ namespace PenApp.DataBase
     public partial class Order
     {
         public int Id { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<int> PenId { get; set; }
-        public Nullable<int> CustomerId { get; set; }
-        public Nullable<int> Count { get; set; }
+        public System.DateTime Date { get; set; }
+        public int PenId { get; set; }
+        public int CustomerId { get; set; }
+        public int Count { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Pen Pen { get; set; }

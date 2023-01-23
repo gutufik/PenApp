@@ -17,9 +17,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypeId" Type="int" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerType">
           <Key>
@@ -33,21 +33,21 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="date" />
-          <Property Name="PenId" Type="int" />
-          <Property Name="CustomerId" Type="int" />
-          <Property Name="Count" Type="int" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="PenId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Pen">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="PenTypeId" Type="int" />
-          <Property Name="CompanyId" Type="int" />
-          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PenTypeId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="PenType">
           <Key>
@@ -71,12 +71,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Login" Type="nvarchar" MaxLength="50" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" />
-          <Property Name="CustomerId" Type="int" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Customer_CustomerType">
-          <End Role="CustomerType" Type="Self.CustomerType" Multiplicity="0..1" />
+          <End Role="CustomerType" Type="Self.CustomerType" Multiplicity="1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CustomerType">
@@ -88,7 +88,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -100,7 +100,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Pen">
-          <End Role="Pen" Type="Self.Pen" Multiplicity="0..1" />
+          <End Role="Pen" Type="Self.Pen" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pen">
@@ -112,7 +112,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pen_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Pen" Type="Self.Pen" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
@@ -124,7 +124,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pen_PenType">
-          <End Role="PenType" Type="Self.PenType" Multiplicity="0..1" />
+          <End Role="PenType" Type="Self.PenType" Multiplicity="1" />
           <End Role="Pen" Type="Self.Pen" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PenType">
@@ -136,7 +136,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -232,9 +232,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypeId" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CustomerType" Relationship="OrderBaseModel.FK_Customer_CustomerType" FromRole="Customer" ToRole="CustomerType" />
           <NavigationProperty Name="Orders" Relationship="OrderBaseModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
           <NavigationProperty Name="Users" Relationship="OrderBaseModel.FK_User_Customer" FromRole="Customer" ToRole="User" />
@@ -252,10 +252,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="PenId" Type="Int32" />
-          <Property Name="CustomerId" Type="Int32" />
-          <Property Name="Count" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PenId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="OrderBaseModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="Pen" Relationship="OrderBaseModel.FK_Order_Pen" FromRole="Order" ToRole="Pen" />
         </EntityType>
@@ -264,11 +264,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PenTypeId" Type="Int32" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PenTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Company" Relationship="OrderBaseModel.FK_Pen_Company" FromRole="Pen" ToRole="Company" />
           <NavigationProperty Name="Orders" Relationship="OrderBaseModel.FK_Order_Pen" FromRole="Pen" ToRole="Order" />
           <NavigationProperty Name="PenType" Relationship="OrderBaseModel.FK_Pen_PenType" FromRole="Pen" ToRole="PenType" />
@@ -296,13 +296,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="OrderBaseModel.FK_User_Customer" FromRole="User" ToRole="Customer" />
         </EntityType>
         <Association Name="FK_Pen_Company">
-          <End Type="OrderBaseModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.Company" Role="Company" Multiplicity="1" />
           <End Type="OrderBaseModel.Pen" Role="Pen" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
@@ -314,7 +314,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Customer_CustomerType">
-          <End Type="OrderBaseModel.CustomerType" Role="CustomerType" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.CustomerType" Role="CustomerType" Multiplicity="1" />
           <End Type="OrderBaseModel.Customer" Role="Customer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CustomerType">
@@ -326,7 +326,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Customer">
-          <End Type="OrderBaseModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.Customer" Role="Customer" Multiplicity="1" />
           <End Type="OrderBaseModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -338,7 +338,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Customer">
-          <End Type="OrderBaseModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.Customer" Role="Customer" Multiplicity="1" />
           <End Type="OrderBaseModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -350,7 +350,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Pen">
-          <End Type="OrderBaseModel.Pen" Role="Pen" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.Pen" Role="Pen" Multiplicity="1" />
           <End Type="OrderBaseModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pen">
@@ -362,7 +362,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pen_PenType">
-          <End Type="OrderBaseModel.PenType" Role="PenType" Multiplicity="0..1" />
+          <End Type="OrderBaseModel.PenType" Role="PenType" Multiplicity="1" />
           <End Type="OrderBaseModel.Pen" Role="Pen" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PenType">

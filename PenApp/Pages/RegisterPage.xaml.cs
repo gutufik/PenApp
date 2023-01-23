@@ -32,8 +32,29 @@ namespace PenApp.Pages
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+            var stringBuilder = new StringBuilder();
             try
             {
+                if (tbLogin.Text == "")
+                    stringBuilder.AppendLine("Запоните логин");
+                if (pbPassword.Password == "")
+                    stringBuilder.AppendLine("Зполните пароль");
+                if (pbPassword.Password != pbConfirmPassword.Password)
+                    stringBuilder.AppendLine("Пароли не совпадают");
+                if (tbName.Text == "")
+                    stringBuilder.AppendLine("Заполните название");
+                if (tbAddress.Text == "")
+                    stringBuilder.AppendLine("Заполните адрес");
+                if (cbType.SelectedItem == null)
+                    stringBuilder.AppendLine("Выберите тип");
+
+                if (stringBuilder.Length > 0)
+                {
+                    MessageBox.Show(stringBuilder.ToString());
+                    return;
+                }
+
+
                 var user = new User()
                 {
                     Login = tbLogin.Text,
@@ -51,10 +72,8 @@ namespace PenApp.Pages
             }
             catch
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("Такой логин уже занят");
             }
-
-
         }
 
         private void btnGoBack_Click(object sender, RoutedEventArgs e)

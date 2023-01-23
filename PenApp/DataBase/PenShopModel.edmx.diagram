@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d03e4968a24744048544a914ccef302c" Name="Diagram1" ZoomLevel="124">
-        <EntityTypeShape EntityType="OrderBaseModel.Company" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="OrderBaseModel.Company" Width="1.5" PointX="0.75" PointY="5.5" />
         <EntityTypeShape EntityType="OrderBaseModel.Customer" Width="1.5" PointX="3" PointY="8.125" />
         <EntityTypeShape EntityType="OrderBaseModel.CustomerType" Width="1.5" PointX="0.75" PointY="8.5" />
         <EntityTypeShape EntityType="OrderBaseModel.Order" Width="1.5" PointX="5.25" PointY="1.125" />
         <EntityTypeShape EntityType="OrderBaseModel.Pen" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="OrderBaseModel.PenType" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="OrderBaseModel.PenType" Width="1.5" PointX="0.75" PointY="1.5" />
         <EntityTypeShape EntityType="OrderBaseModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="OrderBaseModel.User" Width="1.5" PointX="5.25" PointY="8.375" />
         <AssociationConnector Association="OrderBaseModel.FK_Pen_Company" />
