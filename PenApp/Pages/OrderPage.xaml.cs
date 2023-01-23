@@ -31,6 +31,9 @@ namespace PenApp.Pages
                 order.Customer = App.User.Customer;
             Order = order;
 
+            if (Order.Id == 0)
+                btnDelete.Visibility = Visibility.Collapsed;
+
             Pens = DataAccess.GetPens();
             Customers = DataAccess.GetCustomers();
             DataContext = this;

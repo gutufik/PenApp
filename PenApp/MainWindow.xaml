@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PenApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Заказ ручек" MinHeight="550" MinWidth="900" Height="550" Width="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -21,19 +21,20 @@
                    HorizontalAlignment="Center"/>
 
         <Button x:Name="btnMenu" Width="40" Height="40" HorizontalAlignment="Left"
+                VerticalAlignment="Top"
                 Grid.Column="1"
             Click="btnMenu_Click"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
-            <Button x:Name="btnGoBack" Content="Back" Click="btnGoBack_Click"/>
-            <Button x:Name="btnGoForward" Content="Forward" Click="btnGoForward_Click"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1">
+            <Button x:Name="btnGoBack" Content="&lt;" Click="btnGoBack_Click"/>
+            <Button x:Name="btnGoForward" Content="&gt;" Click="btnGoForward_Click"/>
         </StackPanel>
 
 
 
         <Grid x:Name="menuGrid" Grid.RowSpan="2" Width="0" Background="AntiqueWhite" HorizontalAlignment="Left">
             <StackPanel >
-                <Button x:Name="btnPens" Content="Pens" Click="btnPens_Click"/>
-                <Button x:Name="btnOrders" Content="Orders" Click="btnOrders_Click"/>
+                <Button x:Name="btnPens" Content="Ручки" Click="btnPens_Click"/>
+                <Button x:Name="btnOrders" Content="Заказы" Click="btnOrders_Click"/>
             </StackPanel>
         </Grid>
 

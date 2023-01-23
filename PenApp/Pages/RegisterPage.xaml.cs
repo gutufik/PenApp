@@ -22,9 +22,12 @@ namespace PenApp.Pages
     /// </summary>
     public partial class RegisterPage : Page
     {
+        public List<CustomerType> CustomerTypes { get; set; }
         public RegisterPage()
         {
             InitializeComponent();
+            CustomerTypes = DataAccess.GetCustomerTypes();
+            DataContext = this;
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -34,7 +37,13 @@ namespace PenApp.Pages
                 var user = new User()
                 {
                     Login = tbLogin.Text,
-                    Password = pbPassword.Password.ToString()
+                    Password = pbPassword.Password.ToString(),
+                    Customer = new Customer
+                    {
+                        CustomerType = cbType.SelectedItem as CustomerType,
+                        Name = tbName.Text,
+                        Address = tbAddress.Text,
+                    }
                 };
                 DataAccess.SaveUser(user);
                 App.User = user;
@@ -42,7 +51,7 @@ namespace PenApp.Pages
             }
             catch
             {
-                MessageBox.Show("");
+                MessageBox.Show("Error");
             }
 
 

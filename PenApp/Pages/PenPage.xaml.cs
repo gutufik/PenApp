@@ -30,6 +30,8 @@ namespace PenApp.Pages
             Pen = pen;
             PenTypes = DataAccess.GetPenTypes();
             Companies = DataAccess.GetCompanies();
+            if (Pen.Id == 0)
+                btnDelete.Visibility = Visibility.Collapsed;
             DataContext = this;
         }
 

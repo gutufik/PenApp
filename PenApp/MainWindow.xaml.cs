@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PenApp.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,7 +40,7 @@ namespace PenApp
             if (isHidden)
             {
                 menuGrid.Width += 2;
-                if (menuGrid.Width >= 100)
+                if (menuGrid.Width >= 120)
                 {
                     timer.Stop();
                     isHidden = false;
@@ -59,6 +60,17 @@ namespace PenApp
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
             tbTitle.Text = (MainFrame.Content as Page).Title;
+
+            if (MainFrame.Content as LoginPage != null)
+            {
+                btnGoBack.Visibility = Visibility.Collapsed;
+                btnGoForward.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                btnGoBack.Visibility = MainFrame.CanGoBack? Visibility.Visible : Visibility.Collapsed;
+                btnGoForward.Visibility = MainFrame.CanGoForward? Visibility.Visible : Visibility.Collapsed;
+            }
         }
 
         private void btnGoBack_Click(object sender, RoutedEventArgs e)
@@ -81,7 +93,7 @@ namespace PenApp
         private void btnPens_Click(object sender, RoutedEventArgs e)
         {
             if (App.User == null)
-                MessageBox.Show("You need to log in");
+                MessageBox.Show("Сначала нужно авторизоваться");
             else
                 MainFrame.NavigationService.Navigate(new Pages.PenListPage());
         }
@@ -89,7 +101,7 @@ namespace PenApp
         private void btnOrders_Click(object sender, RoutedEventArgs e)
         {
             if (App.User == null)
-                MessageBox.Show("You need to log in");
+                MessageBox.Show("Сначала нужно авторизоваться");
             else
                 MainFrame.NavigationService.Navigate(new Pages.OrderListPage());
         }

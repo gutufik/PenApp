@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:PenApp.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PenListPage">
+      Title="Список ручек">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -32,10 +32,7 @@
                   SelectedIndex="0"
                   SelectionChanged="cbSort_SelectionChanged"/>
 
-
-
-
-        <Button x:Name="btnAdd" Content="Add" 
+        <Button x:Name="btnAdd" Content="Добавить" 
                 Grid.Column="3"
                 Click="btnAdd_Click"/>
 
@@ -46,11 +43,11 @@
                   SelectionChanged="lvPens_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="PenType" DisplayMemberBinding="{Binding PenType.Name}"/>
-                    <GridViewColumn Header="Company" DisplayMemberBinding="{Binding Company.Name}"/>
-                    <GridViewColumn Header="Color" DisplayMemberBinding="{Binding Color}"/>
-                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Тип" DisplayMemberBinding="{Binding PenType.Name}"/>
+                    <GridViewColumn Header="Производитель" DisplayMemberBinding="{Binding Company.Name}"/>
+                    <GridViewColumn Header="Цвет" DisplayMemberBinding="{Binding Color}"/>
+                    <GridViewColumn Header="Цена" DisplayMemberBinding="{Binding Price}"/>
                 </GridView>
             </ListView.View>
         </ListView>
