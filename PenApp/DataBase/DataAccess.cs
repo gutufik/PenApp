@@ -28,6 +28,8 @@ namespace PenApp.DataBase
 
         public static User GetUser(string login, string password) => GetUsers().FirstOrDefault(x => x.Login == login && x.Password == password);
 
+        public static List<Order> GetOrders(User user) => GetOrders().FindAll(x => x.Customer == user.Customer);
+
         public static void SaveUser(User user)
         {
             if (user.Id == 0)

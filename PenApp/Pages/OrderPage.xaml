@@ -14,11 +14,11 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="Date" />
@@ -30,11 +30,12 @@
         <ComboBox x:Name="cbCustomer" Grid.Row="1" Grid.Column="1"
                   ItemsSource="{Binding Customers}"
                   SelectedItem="{Binding Order.Customer}"
+                  IsEnabled="False"
                   DisplayMemberPath="Name"/>
 
         <ComboBox x:Name="cbPen" Grid.Row="2" Grid.Column="1" 
                   ItemsSource="{Binding Pens}"
-                  SelectedItem="{Binding Order.Customer}"
+                  SelectedItem="{Binding Order.Pen}"
                   DisplayMemberPath="Name"/>
         <TextBox x:Name="tbCount" 
                  Grid.Row="3" Grid.Column="1" 

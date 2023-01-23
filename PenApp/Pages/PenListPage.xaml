@@ -13,9 +13,10 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
@@ -26,28 +27,32 @@
                   SelectionChanged="cbType_SelectionChanged"
                   SelectedIndex="0"
                   DisplayMemberPath="Name"/>
+        <ComboBox x:Name="cbSort" Grid.Column="2"
+                  ItemsSource="{Binding Sortings.Keys}"
+                  SelectedIndex="0"
+                  SelectionChanged="cbSort_SelectionChanged"/>
+
+
 
 
         <Button x:Name="btnAdd" Content="Add" 
-                Grid.Column="2"
+                Grid.Column="3"
                 Click="btnAdd_Click"/>
 
         <ListView x:Name="lvPens"
-                  Grid.ColumnSpan="3"
+                  Grid.ColumnSpan="4"
                   Grid.Row="1"
                   ItemsSource="{Binding Pens}"
                   SelectionChanged="lvPens_SelectionChanged">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock >
-                        <Run Text="{Binding Name}"/>
-                        <Run Text="{Binding PenType.Name}"/>
-                        <Run Text="{Binding Company.Name}"/>
-                        <Run Text="{Binding Color}"/>
-                        <Run Text="{Binding Price}"/>
-                    </TextBlock>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="PenType" DisplayMemberBinding="{Binding PenType.Name}"/>
+                    <GridViewColumn Header="Company" DisplayMemberBinding="{Binding Company.Name}"/>
+                    <GridViewColumn Header="Color" DisplayMemberBinding="{Binding Color}"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                </GridView>
+            </ListView.View>
         </ListView>
     </Grid>
 </Page>

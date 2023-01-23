@@ -7,12 +7,38 @@
         <Style TargetType="Button">
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="MaxWidth" Value="300"/>
+            <Setter Property="MaxHeight" Value="50"/>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="10"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="MaxWidth" Value="300"/>
+            <Setter Property="MaxHeight" Value="50"/>
         </Style>
         <Style TargetType="PasswordBox">
             <Setter Property="Margin" Value="10"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="MaxWidth" Value="300"/>
+            <Setter Property="MaxHeight" Value="50"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="MaxWidth" Value="300"/>
+            <Setter Property="MaxHeight" Value="50"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="MaxWidth" Value="300"/>
+            <Setter Property="MaxHeight" Value="50"/>
         </Style>
          
     </Application.Resources>

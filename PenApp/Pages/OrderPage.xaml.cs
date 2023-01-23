@@ -22,12 +22,17 @@ namespace PenApp.Pages
     {
         public Order Order { get; set; }
         public List<Pen> Pens { get; set; }
+        public List<Customer> Customers { get; set; } 
 
         public OrderPage(Order order)
         {
             InitializeComponent();
+            if (order.Customer == null ) 
+                order.Customer = App.User.Customer;
             Order = order;
+
             Pens = DataAccess.GetPens();
+            Customers = DataAccess.GetCustomers();
             DataContext = this;
         }
 

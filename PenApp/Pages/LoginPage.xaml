@@ -16,20 +16,19 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Login"/>
+        <TextBlock Grid.Column="1"  Text="Login"/>
         <TextBox x:Name="tbLogin" Grid.Column="1" 
-                 Grid.Row="2" />
+                 Grid.Row="1" />
 
-        <TextBlock Grid.Column="1" Grid.Row="3"  Text="Password"/>
-        <PasswordBox x:Name="pbPassword" Grid.Column="1" Grid.Row="4"/>
+        <TextBlock Grid.Column="1" Grid.Row="2"  Text="Password"/>
+        <PasswordBox x:Name="pbPassword" Grid.Column="1" Grid.Row="3"/>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Grid.Column="1" Grid.Row="5">

@@ -15,7 +15,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <TextBlock x:Name="tbTitle" 
                    Grid.ColumnSpan="2"
                    HorizontalAlignment="Center"/>
@@ -28,7 +28,7 @@
             <Button x:Name="btnGoForward" Content="Forward" Click="btnGoForward_Click"/>
         </StackPanel>
 
-        
+
 
         <Grid x:Name="menuGrid" Grid.RowSpan="2" Width="0" Background="AntiqueWhite" HorizontalAlignment="Left">
             <StackPanel >
@@ -36,7 +36,7 @@
                 <Button x:Name="btnOrders" Content="Orders" Click="btnOrders_Click"/>
             </StackPanel>
         </Grid>
-        
+
         <Frame x:Name="MainFrame" Grid.Row="1" 
                Grid.Column="1"
                NavigationUIVisibility="Hidden"/>
